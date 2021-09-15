@@ -1,4 +1,4 @@
- <   var app = require("express")();
+var app = require("express")();
 var server = require("http").Server(app);
 var bodyParser = require("body-parser");
 var Datastore = require("nedb");
@@ -11,12 +11,12 @@ module.exports = app;
 
 // Create Database
 var Transactions = new Datastore({
-  filename: "./server/databases/tickets.db",
+  filename: "./server/databases/ticket.db",
   autoload: true
 });
 
 app.get("/", function (req, res) {
-  res.send("Tickets api.  /all(get),/new(post) ,/:transactionId (get con _id");
+  res.send("Tickets api");
 });
 
 // GET all transactions
