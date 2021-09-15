@@ -16,7 +16,7 @@ var Transactions = new Datastore({
 });
 
 app.get("/", function (req, res) {
-  res.send("Tickets api");
+  res.send("Tickets api.  /all(get),/new(post) ,/:transactionId (get con _id");
 });
 
 // GET all transactions
