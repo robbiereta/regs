@@ -58,29 +58,28 @@ app.get("/day-total", function (req, res) {
     endDate.setHours(23, 59, 59, 999);
   }
 
-  Transactions.find(
-    { date: { $gte: startDate.toJSON(), $lte: endDate.toJSON() } },
-    function (err, docs) {
-      var result = {
-        date: startDate
-      };
+  Transactions.find({}, function (err, docs) {
+    var result = {
+      date: startDate
+    };
 
-      if (docs) {
-        var total = docs.reduce(function (p, c) {
-          return p + c.total;
-        }, 0.0);
-
-        result.total = parseFloat(parseFloat(total).toFixed(2));
-
-        res.send(result);
-      } else {
-        result.total = 0;
-        res.send(result);
-      }
+    if (docs) {
+      res.send(result);
+      console.log(docs);
+    } else {
+      result.total = 0;
+      res.send(result);
+      console.log("no hubo resultados");
     }
-  );
+  });
 });
 
+// GET all transactions
+app.get("/all_day", function (req, res) {
+  Transactions.find({}, function (err, docs) {
+    res.send(docs);
+  });
+});
 // GET transactions for a particular date
 app.get("/by-date", function (req, res) {
   var startDate = new Date();
